@@ -1,0 +1,12 @@
+# Changes here will be overwritten by Copier; NEVER EDIT MANUALLY
+_commit: 0.7.1
+_src_path: gh:quickplates/meta
+accountname: quickplates
+description: Helm charts template ⛵
+example: true
+exampleaccountname: quickplates
+exampledescription: Helm charts example ⛵
+examplereponame: helm-example
+reponame: helm
+repourl: https://github.com/quickplates/helm
+type: generic

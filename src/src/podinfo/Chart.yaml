@@ -1,0 +1,21 @@
+# Version of Helm this chart is compatible with
+apiVersion: v2
+
+# Version of the chart itself
+version: "0.1.0"
+
+# Version of the application provided by this chart
+appVersion: "6.6.2"
+
+# Name of the chart
+name: podinfo
+
+# A short description of the chart
+description: Go microservice template for Kubernetes
+
+# Home page of the app
+home: https://github.com/stefanprodan/podinfo
+
+# Source code repository of the app
+sources:
+  - https://github.com/stefanprodan/podinfo

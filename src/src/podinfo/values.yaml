@@ -1,0 +1,9 @@
+# Configuration of the app
+app:
+  # Port to listen on
+  port: 9898
+
+# Configuration of the service
+service:
+  # Port to listen on
+  port: 9898

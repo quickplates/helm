@@ -1,0 +1,4 @@
+{
+  // Don't scan for git repositories other than the workspace root
+  "git.autoRepositoryDetection": false
+}

@@ -1,0 +1,36 @@
+<h1 align="center">{{ projectname }}</h1>
+
+<div align="center">
+
+{{ description }}
+
+[![Lint]({{ repourl }}/actions/workflows/lint.yaml/badge.svg)]({{ repourl }}/actions/workflows/lint.yaml)
+[![Validate]({{ repourl }}/actions/workflows/validate.yaml/badge.svg)]({{ repourl }}/actions/workflows/validate.yaml)
+[![Build]({{ repourl }}/actions/workflows/build.yaml/badge.svg)]({{ repourl }}/actions/workflows/build.yaml)
+[![Release]({{ repourl }}/actions/workflows/release.yaml/badge.svg)]({{ repourl }}/actions/workflows/release.yaml)
+{%- if docs %}
+[![Docs]({{ repourl }}/actions/workflows/docs.yaml/badge.svg)]({{ repourl }}/actions/workflows/docs.yaml)
+{%- endif %}
+
+</div>
+
+---
+
+## 💡 About
+
+Treat this `README.md` as the landing page for people
+that want to **use** your project.
+
+Write here whatever you want to tell them.
+{%- if docs %}
+
+## 📄 Further Reading
+
+More in-depth documentation can be found
+[here]({{ docsurl }}).
+{%- endif %}
+
+## 💻 Development
+
+Read more about how to develop the project
+[here]({{ repourl }}/blob/main/CONTRIBUTING.md).

@@ -1,0 +1,39 @@
+# Questions
+
+accountname:
+  type: str
+  help: The name of the organization on GitHub
+
+projectname:
+  type: str
+  help: The name of the project
+
+description:
+  type: str
+  help: A short description of the project
+
+reponame:
+  type: str
+  help: The name of the repository
+  default: "{{ projectname }}"
+
+repourl:
+  type: str
+  help: The URL of the repository
+  default: "https://github.com/{{ accountname }}/{{ reponame }}"
+
+docs:
+  type: bool
+  help: Whether to include a documentation site for the project
+  default: true
+
+docsurl:
+  type: str
+  help: The URL of the documentation site for the project
+  default: "https://{{ accountname }}.github.io/{{ reponame }}"
+  when: "{{ docs }}"
+
+# Configuration
+
+_subdirectory: src
+_answers_file: .copier-answers.yaml

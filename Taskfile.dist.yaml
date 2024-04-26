@@ -1,0 +1,159 @@
+version: "3"
+
+tasks:
+  template:
+    desc: Fetch template updates
+    interactive: true
+    env:
+      GIT_CONFIG_GLOBAL: ""
+      GIT_CONFIG_SYSTEM: ""
+    cmds:
+      - >
+        copier
+        update
+        --answers-file
+        .copier-answers.yaml
+        {{ .CLI_ARGS }}
+  flake:
+    desc: Update flake.lock
+    cmds:
+      - >
+        nix
+        --accept-flake-config
+        --extra-experimental-features
+        'nix-command flakes'
+        --no-warn-dirty
+        flake
+        update
+        {{ .CLI_ARGS }}
+  fmt:
+    desc: Format files
+    cmds:
+      - >
+        trunk
+        fmt
+        {{ .CLI_ARGS }}
+  lint:
+    desc: Lint files
+    cmds:
+      - >
+        trunk
+        check
+        {{ .CLI_ARGS }}
+  clean:
+    desc: Clean build files
+    cmds:
+      - >
+        rm
+        --recursive
+        --force
+        {{ .CLI_ARGS }}
+        build/
+    status:
+      - >
+        test
+        '!'
+        -d
+        build/
+  shallow-build:
+    desc: Build the project without initializing git
+    env:
+      GIT_CONFIG_GLOBAL: ""
+      GIT_CONFIG_SYSTEM: ""
+      GIT_AUTHOR_NAME: test
+      GIT_AUTHOR_EMAIL: test@example.org
+      GIT_COMMITTER_NAME: test
+      GIT_COMMITTER_EMAIL: test@example.org
+    sources:
+      - src/**/*
+      - .gitignore
+      - copier.yaml
+      - flake.lock
+      - "*.nix"
+      - Taskfile.dist.yaml
+      - "{taskfile,Taskfile}.{yaml,yml}"
+    generates:
+      - build/**/*
+    cmds:
+      - task: clean
+        vars:
+          CLI_ARGS: ""
+      - >
+        copier
+        copy
+        --overwrite
+        --defaults
+        --vcs-ref
+        HEAD
+        {{ .CLI_ARGS }}
+        ./
+        build/
+  init-build:
+    desc: Initialize git in the build directory
+    internal: true
+    env:
+      GIT_CONFIG_GLOBAL: ""
+      GIT_CONFIG_SYSTEM: ""
+      GIT_AUTHOR_NAME: test
+      GIT_AUTHOR_EMAIL: test@example.org
+      GIT_COMMITTER_NAME: test
+      GIT_COMMITTER_EMAIL: test@example.org
+    dir: build/
+    cmds:
+      - >
+        git
+        init
+        --initial-branch
+        main
+        --quiet
+      - >
+        git
+        commit
+        --allow-empty
+        --message
+        'Initial commit'
+        --quiet
+    status:
+      - >
+        test
+        -d
+        .git/
+  add-build-changes:
+    desc: Add build changes to git
+    internal: true
+    env:
+      GIT_CONFIG_GLOBAL: ""
+      GIT_CONFIG_SYSTEM: ""
+    dir: build/
+    cmds:
+      - >
+        git
+        add
+        --all
+    status:
+      - >
+        test
+        -z
+        "$(git ls-files --others --exclude-standard)"
+  build:
+    desc: Build the project
+    cmds:
+      - task: shallow-build
+        vars:
+          CLI_ARGS: >-
+            --data
+            'accountname=foo'
+            --data
+            'projectname=foo'
+            --data
+            'description=Example project'
+            {{ .CLI_ARGS }}
+      - task: init-build
+      - task: add-build-changes
+  test:
+    desc: Test the project
+    cmds:
+      - >
+        pytest
+        tests/
+        {{ .CLI_ARGS }}
