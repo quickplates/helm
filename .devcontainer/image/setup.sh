@@ -58,3 +58,16 @@ EOF
 cat <<EOF >>"${REMOTE_USER_HOME}/.zshrc"
 export TRUNK_CACHE=/cache/trunk/
 EOF
+
+# Setup npm cache
+mkdir --parents /cache/npm/
+
+chown --recursive "${REMOTE_USER}:" /cache/npm/
+
+cat <<EOF >>"${REMOTE_USER_HOME}/.bashrc"
+export NPM_CONFIG_CACHE=/cache/npm/
+EOF
+
+cat <<EOF >>"${REMOTE_USER_HOME}/.zshrc"
+export NPM_CONFIG_CACHE=/cache/npm/
+EOF
