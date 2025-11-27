@@ -1,72 +1,72 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "object",
   "properties": {
+    "app": {
+      "properties": {
+        "port": {
+          "type": "integer"
+        }
+      },
+      "required": ["port"],
+      "type": "object"
+    },
+    "common": {
+      "properties": {
+        "metadata": {
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "configMap": {
+      "properties": {
+        "metadata": {
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "deployment": {
+      "properties": {
+        "metadata": {
+          "type": "object"
+        },
+        "spec": {
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
     "name": {
       "type": "string"
     },
-    "common": {
-      "type": "object",
+    "pod": {
       "properties": {
         "metadata": {
           "type": "object"
-        }
-      }
-    },
-    "app": {
-      "type": "object",
-      "properties": {
-        "port": {
-          "type": "integer"
+        },
+        "spec": {
+          "type": "object"
         }
       },
-      "required": ["port"]
-    },
-    "configMap": {
-      "type": "object",
-      "properties": {
-        "metadata": {
-          "type": "object"
-        }
-      }
-    },
-    "pod": {
-      "type": "object",
-      "properties": {
-        "metadata": {
-          "type": "object"
-        },
-        "spec": {
-          "type": "object"
-        }
-      }
-    },
-    "deployment": {
-      "type": "object",
-      "properties": {
-        "metadata": {
-          "type": "object"
-        },
-        "spec": {
-          "type": "object"
-        }
-      }
+      "type": "object"
     },
     "service": {
-      "type": "object",
       "properties": {
-        "port": {
-          "type": "integer"
-        },
         "metadata": {
           "type": "object"
+        },
+        "port": {
+          "type": "integer"
         },
         "spec": {
           "type": "object"
         }
       },
-      "required": ["port"]
+      "required": ["port"],
+      "type": "object"
     }
   },
-  "required": ["app", "service"]
+  "required": ["app", "service"],
+  "type": "object"
 }

@@ -1,4 +1,6 @@
 {
-  // Don't scan for git repositories other than the workspace root
+  "files.associations": {
+    "**/src/**": "plaintext"
+  },
   "git.autoRepositoryDetection": false
 }
