@@ -23,10 +23,27 @@ ignore = [
   "Q003",
   "W191",
 
-  # Disable some docstring rules that are too strict
+  # Disable rules that are too strict
+  "ANN401",
+  "ARG",
+  "BLE",
   "D100",
   "D104",
   "D105",
   "D106",
   "D107",
+  "S104",
+]
+
+[lint.extend-per-file-ignores]
+# Disable some rules in tests
+"tests/**" = [
+  # Disable irrelevant rules
+  "S",
+]
+
+[lint.isort]
+known-first-party = [
+  # Treat tests as a first-party module
+  "tests",
 ]

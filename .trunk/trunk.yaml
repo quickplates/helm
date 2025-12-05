@@ -10,7 +10,7 @@ runtimes:
   enabled:
     # Needed for gitleaks, shfmt
     - go@1.25.0
-    # Needed for markdownlint, prettier
+    # Needed for markdownlint, prettier, pyright
     - node@22.20.0
     # Needed for ruff, yamllint
     - python@3.13.3
@@ -57,11 +57,13 @@ lint:
             check
             path:${target}
           success_codes: [0, 1]
-    # Enable Ruff formatter
-    - name: ruff
-      commands:
-        - name: format
-          enabled: true
+    # Modify existing pyright definition
+    - name: pyright
+      environment:
+        - name: PATH
+          list:
+            # Add Python to Path
+            - ${env.PYRIGHT_PYTHON}/bin
   enabled:
     # GitHub Actions linting
     - actionlint@1.7.8
@@ -80,8 +82,13 @@ lint:
         packages:
           # JSON sorting
           - prettier-plugin-sort-json@4.1.1
+    # Python type checking
+    - pyright@1.1.407
     # Python formatting and linting
-    - ruff@0.14.5
+    - ruff@0.14.5:
+        commands:
+          - lint
+          - format
     # Shell linting
     - shellcheck@0.11.0
     # Shell formatting
