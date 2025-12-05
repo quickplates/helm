@@ -1,3 +1,4 @@
+from collections.abc import Generator
 from pathlib import Path
 
 import pytest
@@ -29,7 +30,7 @@ def cloned_template_directory(
     tmp_path_factory: pytest.TempPathFactory,
     root_directory: Path,
     tracked_files: list[Path],
-) -> Path:
+) -> Generator[Path]:
     """Return a temporary directory with a cloned copy of the repository."""
     tmp_path = tmp_path_factory.mktemp("cloned-template-repo-")
 

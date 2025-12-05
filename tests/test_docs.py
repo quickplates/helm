@@ -1,3 +1,4 @@
+from collections.abc import Generator
 from pathlib import Path
 
 import copier
@@ -26,7 +27,7 @@ def copied_template_directory(
     tmp_path_factory: pytest.TempPathFactory,
     cloned_template_directory: Path,
     data: dict[str, str],
-) -> Path:
+) -> Generator[Path]:
     """Return a temporary directory with a copied template."""
     tmp_path = tmp_path_factory.mktemp("copied-template-")
 

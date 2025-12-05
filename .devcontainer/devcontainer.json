@@ -129,6 +129,7 @@
             }
           }
         },
+        "python.analysis.nodeExecutable": "auto",
         "remote.autoForwardPorts": false
       }
     }
